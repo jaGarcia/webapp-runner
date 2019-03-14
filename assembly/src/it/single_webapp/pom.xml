@@ -44,7 +44,7 @@
             <configuration>
               <artifactItems>
                 <artifactItem>
-                  <groupId>com.github.jsimone</groupId>
+                  <groupId>com.github.jagarcia</groupId>
                   <artifactId>webapp-runner</artifactId>
                   <version>@project.version@</version>
                   <destFileName>webapp-runner.jar</destFileName>
