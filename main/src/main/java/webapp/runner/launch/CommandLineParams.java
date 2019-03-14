@@ -100,7 +100,7 @@ public class CommandLineParams {
     @Parameter(names = "--bind-on-init", description = "Controls when the socket used by the connector is bound. By default it is bound when the connector is initiated and unbound when the connector is destroyed., default value: true", arity = 1)
     public boolean bindOnInit = true;
 
-    @Parameter(names = "--bind-on-init-start-connector-property", description = "If bindOnInit is false, this connector will be started once this system property exists and equals true", arity = 1)
+    @Parameter(names = "--bind-on-init-start-connector-property", description = "If bindOnInit is false, this connector will be started once this system property exists and equals true")
     public String bindOnInitStartConnectorProperty;
 
 
