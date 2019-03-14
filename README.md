@@ -1,4 +1,4 @@
-# Webapp Runner [![Build Status](https://travis-ci.org/jsimone/webapp-runner.svg?branch=master)](https://travis-ci.org/jsimone/webapp-runner) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.jagarcia/webapp-runner/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.jagarcia/webapp-runner)
+# Webapp Runner [![Build Status](https://travis-ci.org/jsimone/webapp-runner.svg?branch=master)](https://travis-ci.org/jsimone/webapp-runner) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.jaGarcia/webapp-runner/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.jaGarcia/webapp-runner)
 
 Webapp runner is designed to allow you to launch an exploded or compressed war that is on your filesystem into a tomcat container with a simple `java -jar` command. It supports the following version of Tomcat:
 
@@ -51,7 +51,7 @@ Add the following to your pom.xml:
                   <configuration>
                       <artifactItems>
                           <artifactItem>
-                              <groupId>com.github.jagarcia</groupId>
+                              <groupId>com.github.jaGarcia</groupId>
                               <artifactId>webapp-runner</artifactId>
                               <version>${webapp-runner.version</version>
                               <destFileName>webapp-runner.jar</destFileName>
@@ -77,13 +77,13 @@ You can exclude them by using `webapp-runner-main`:
 
 ```xml
 <dependency>
-  <groupId>com.github.jagarcia</groupId>
+  <groupId>com.github.jaGarcia</groupId>
   <artifactId>webapp-runner-main</artifactId>
   <version>${webapp-runner.version</version>
 </dependency>
 ```
 
-In most cases, this `groupId` and `artifactId` can be substituted for `com.github.jagarcia:webapp-runner`.
+In most cases, this `groupId` and `artifactId` can be substituted for `com.github.jaGarcia:webapp-runner`.
 
 ### Launching
 
@@ -132,7 +132,7 @@ Add the following dependency to your pom.xml:
 
 ```xml
 <dependency>
-  <groupId>com.github.jagarcia</groupId>
+  <groupId>com.github.jaGarcia</groupId>
   <artifactId>webapp-runner</artifactId>
   <version>8.5.11.3</version>
   <scope>provided</scope>
@@ -280,14 +280,14 @@ See the Tomcat documentation for a [complete list of HTTP connector attributes](
 
 ### Using without Memcached or Redis
 
-The default packaging of Webapp Runner (`com.github.jagarcia:webapp-runner`) includes
+The default packaging of Webapp Runner (`com.github.jaGarcia:webapp-runner`) includes
 client libraries for Memcached and Redis so they can easily be used for session storage.
 If you do not require these dependencies, you can alternative use the
 `webapp-runner-main` packaging thusly:
 
 ```xml
 <dependency>
-  <groupId>com.github.jagarcia</groupId>
+  <groupId>com.github.jaGarcia</groupId>
   <artifactId>webapp-runner-main</artifactId>
   <version>${webapp-runner.version</version>
 </dependency>
