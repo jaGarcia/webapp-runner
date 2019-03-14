@@ -183,6 +183,9 @@ Usage: <main class> [options]
        bound when the connector is initiated and unbound when the connector is
        destroyed., default value: true
        Default: true
+    --bind-on-init-start-connector-property
+      If bindOnInit is false, this connector will be started once this system 
+      property exists and equals true 
     --compressable-mime-types
        Comma delimited list of mime types that will be compressed when using
        GZIP compression.
