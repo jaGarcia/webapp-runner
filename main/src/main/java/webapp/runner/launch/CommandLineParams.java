@@ -36,17 +36,17 @@ public class CommandLineParams {
     @Parameter(names = "--session-store", description = "Session store to use (valid options are 'memcache' or 'redis')")
     public String sessionStore;
 
-  @Parameter(names = "--session-store-pool-size", description = "Pool size of the session store connections (default is 10. Has no effect for 'memcache')")
-  public Integer sessionStorePoolSize = 10;
+    @Parameter(names = "--session-store-pool-size", description = "Pool size of the session store connections (default is 10. Has no effect for 'memcache')")
+    public Integer sessionStorePoolSize = 10;
 
-  @Parameter(names = "--session-store-operation-timeout", description = "Operation timeout for the memcache session store. (default is 5000ms)")
-  public Integer sessionStoreOperationTimout = 5000;
+    @Parameter(names = "--session-store-operation-timeout", description = "Operation timeout for the memcache session store. (default is 5000ms)")
+    public Integer sessionStoreOperationTimout = 5000;
 
-  @Parameter(names = "--session-store-locking-mode", description = "Session locking mode for use with memcache session store. (default is all. Has no effect for 'redis')")
-  public String sessionStoreLockingMode = "all";
+    @Parameter(names = "--session-store-locking-mode", description = "Session locking mode for use with memcache session store. (default is all. Has no effect for 'redis')")
+    public String sessionStoreLockingMode = "all";
 
-  @Parameter(names = "--session-store-ignore-pattern", description = "Request pattern to not track sessions for. Valid only with memcache session store. (default is '.*\\.(png|gif|jpg|css|js)$'. Has no effect for 'redis')")
-  public String sessionStoreIgnorePattern = ".*\\.(png|gif|jpg|css|js)$";
+    @Parameter(names = "--session-store-ignore-pattern", description = "Request pattern to not track sessions for. Valid only with memcache session store. (default is '.*\\.(png|gif|jpg|css|js)$'. Has no effect for 'redis')")
+    public String sessionStoreIgnorePattern = ".*\\.(png|gif|jpg|css|js)$";
 
     @Parameter(names = "--help", help = true)
     public boolean help;
@@ -101,7 +101,7 @@ public class CommandLineParams {
     public boolean bindOnInit = true;
 
     @Parameter(names = "--bind-on-init-start-connector-property", description = "If bindOnInit is false, this connector will be started once this system property exists and equals true")
-    public String bindOnInitStartConnectorProperty;
+    public String bindOnInitStartConnectorProperty = null;
 
 
     @Parameter(names = "--proxy-base-url", description = "Set proxy URL if tomcat is running behind reverse proxy")
@@ -110,22 +110,23 @@ public class CommandLineParams {
     @Parameter(names = "--max-threads", description = "Set the maximum number of worker threads")
     public Integer maxThreads = 0;
 
-  @Parameter(names = "--memcached-transcoder-factory-class", description = "The class name of the factory that creates the transcoder to use for serializing/deserializing sessions to/from memcached.")
-  public String memcachedTranscoderFactoryClass = null;
+    @Parameter(names = "--memcached-transcoder-factory-class", description = "The class name of the factory that creates the transcoder to use for serializing/deserializing sessions to/from memcached.")
+    public String memcachedTranscoderFactoryClass = null;
 
-  @DynamicParameter(
-          names = "-A",
-          description = "Allows setting HTTP connector attributes. For example: -Acompression=on"
-  )
-  public Map<String, String> attributes = new HashMap<String, String>();
+    @DynamicParameter(
+            names = "-A",
+            description = "Allows setting HTTP connector attributes. For example: -Acompression=on"
+    )
+
+    public Map<String, String> attributes = new HashMap<String, String>();
 
     @Parameter(names = "--enable-naming", description = "Enables JNDI naming")
     public boolean enableNaming = false;
 
-  @Parameter(names = "--access-log", description = "Enables AccessLogValue to STDOUT")
-  public boolean accessLog = false;
+    @Parameter(names = "--access-log", description = "Enables AccessLogValue to STDOUT")
+    public boolean accessLog = false;
 
-  @Parameter(names = "--access-log-pattern", description = "If --access-log is enabled, sets the logging pattern")
-  public String accessLogPattern = "common";
+    @Parameter(names = "--access-log-pattern", description = "If --access-log is enabled, sets the logging pattern")
+    public String accessLogPattern = "common";
 
 }
