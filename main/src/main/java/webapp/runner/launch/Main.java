@@ -71,6 +71,8 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
+        System.out.println("Init'ing custom web-app runner version!");
+
         CommandLineParams commandLineParams = new CommandLineParams();
 
         JCommander jCommander = new JCommander(commandLineParams, args);
