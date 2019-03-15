@@ -54,6 +54,7 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
+import java.util.concurrent.Delayed;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
@@ -281,16 +282,16 @@ public class Main {
             enableBasicAuth(ctx, commandLineParams.enableSSL);
         }
 
-    if (commandLineParams.accessLog) {
-      Host host = tomcat.getHost();
-      StdoutAccessLogValve valve = new StdoutAccessLogValve();
-      valve.setEnabled(true);
-      valve.setPattern(commandLineParams.accessLogPattern);
-      host.getPipeline().addValve(valve);
-    }
+        if (commandLineParams.accessLog) {
+            Host host = tomcat.getHost();
+            StdoutAccessLogValve valve = new StdoutAccessLogValve();
+            valve.setEnabled(true);
+            valve.setPattern(commandLineParams.accessLogPattern);
+            host.getPipeline().addValve(valve);
+        }
 
-    //start the server
-    tomcat.start();
+        //start the server
+        tomcat.start();
 
         /*
          * NamingContextListener.lifecycleEvent(LifecycleEvent event)
@@ -307,20 +308,56 @@ public class Main {
 
         tomcat.getServer().await();
 
+
         if (!commandLineParams.bindOnInit && commandLineParams.bindOnInitStartConnectorProperty != null) {
 
-            boolean notStarted = true;
-            while (notStarted) {
-                boolean triggerStart = "true".equalsIgnoreCase(System.getProperty(commandLineParams.bindOnInitStartConnectorProperty));
+            Thread thread = new Thread(new DelayedStartRunnable(tomcat, commandLineParams.bindOnInitStartConnectorProperty));
 
-                if (triggerStart) {
-                    tomcat.getConnector().start();
-                    notStarted = false;
-                } else {
-                    System.out.println("BindOnInit is false. bindOnInitStartConnectorProperty is still null. " +
-                            "Sleeping until System property is set to trigger Tomcat's connector to start.");
-                    sleep(2000);
+            thread.start();
+
+        }
+    }
+
+    private static class DelayedStartRunnable implements Runnable {
+
+        boolean notStarted = true;
+
+        String bindOnInitStartConnectorProperty;
+
+        Tomcat tomcat;
+
+        DelayedStartRunnable(Tomcat tomcat, String bindOnInitStartConnectorProperty) {
+            this.tomcat = tomcat;
+            this.bindOnInitStartConnectorProperty = bindOnInitStartConnectorProperty;
+        }
+
+        @Override
+        public void run() {
+
+            try {
+                System.out.println("Starting thread to await bindOnInitStartConnectorProperty being set. ");
+
+                while (notStarted) {
+                    boolean triggerStart = "true".equalsIgnoreCase(System.getProperty(bindOnInitStartConnectorProperty));
+
+                    if (triggerStart) {
+                        tomcat.getConnector().start();
+                        notStarted = false;
+                    } else {
+                        System.out.println("BindOnInit is false. bindOnInitStartConnectorProperty is still null. " +
+                                "Sleeping until System property is set to trigger Tomcat's connector to start.");
+                        sleep(2000);
+                    }
                 }
+            } catch (LifecycleException ex) {
+                System.out.println("Error starting tomcat connector triggered by bindOnInitStartConnectorProperty. reason=" + ex.getMessage());
+
+                System.exit(1);
+
+            } catch (InterruptedException ex) {
+                System.out.println("Error sleeping while waiting for bindOnInitStartConnectorProperty to be set. reason=" + ex.getMessage());
+
+                System.exit(1);
             }
         }
     }
