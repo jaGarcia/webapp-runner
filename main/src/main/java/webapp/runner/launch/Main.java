@@ -309,7 +309,7 @@ public class Main {
         tomcat.getServer().await();
 
 
-        if (!commandLineParams.bindOnInit && commandLineParams.bindOnInitStartConnectorProperty != null) {
+        if (!commandLineParams.bindOnInit) {
 
             System.out.println("About to create DelayedStartRunnable");
             Thread thread = new Thread(new DelayedStartRunnable(tomcat, commandLineParams.bindOnInitStartConnectorProperty));
@@ -336,21 +336,26 @@ public class Main {
         public void run() {
 
             try {
-                System.out.println("Starting thread to await bindOnInitStartConnectorProperty being set. ");
+                System.out.println("About to sleep 15 seconds ");
 
-                while (notStarted) {
-                    boolean triggerStart = "true".equalsIgnoreCase(System.getProperty(bindOnInitStartConnectorProperty));
+                sleep(15000);
 
-                    if (triggerStart) {
-                        System.out.println("Found bindOnInitStartConnectorProperty! Starting tomcat connector!");
-                        tomcat.getConnector().start();
-                        notStarted = false;
-                    } else {
-                        System.out.println("BindOnInit is false. bindOnInitStartConnectorProperty is still null. " +
-                                "Sleeping until System property is set to trigger Tomcat's connector to start.");
-                        sleep(2000);
-                    }
-                }
+                System.out.println("Starting tomcat connector!");
+                tomcat.getConnector().start();
+
+//                while (notStarted) {
+//                    boolean triggerStart = "true".equalsIgnoreCase(System.getProperty(bindOnInitStartConnectorProperty));
+//
+//                    if (triggerStart) {
+//                        System.out.println("Found bindOnInitStartConnectorProperty! Starting tomcat connector!");
+//                        tomcat.getConnector().start();
+//                        notStarted = false;
+//                    } else {
+//                        System.out.println("BindOnInit is false. bindOnInitStartConnectorProperty is still null. " +
+//                                "Sleeping until System property is set to trigger Tomcat's connector to start.");
+//                        sleep(2000);
+//                    }
+//                }
             } catch (LifecycleException ex) {
                 System.out.println("Error starting tomcat connector triggered by bindOnInitStartConnectorProperty. reason=" + ex.getMessage());
 
