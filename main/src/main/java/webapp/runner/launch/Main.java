@@ -305,11 +305,6 @@ public class Main {
             configureUserStore(tomcat, commandLineParams);
         }
 
-
-
-        tomcat.getServer().await();
-
-
         if (!commandLineParams.bindOnInit) {
 
             System.out.println("About to create DelayedStartRunnable");
@@ -320,6 +315,10 @@ public class Main {
         }
 
         commandLineParams = null;
+
+        tomcat.getServer().await();
+
+
     }
 
     private static class DelayedStartRunnable implements Runnable {
