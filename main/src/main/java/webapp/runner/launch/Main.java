@@ -72,7 +72,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        System.out.println("Init'ing custom web-app runner version! test2");
+        System.out.println("Init'ing custom web-app runner version! test3");
 
         CommandLineParams commandLineParams = new CommandLineParams();
 
@@ -305,7 +305,7 @@ public class Main {
             configureUserStore(tomcat, commandLineParams);
         }
 
-        commandLineParams = null;
+
 
         tomcat.getServer().await();
 
@@ -318,6 +318,8 @@ public class Main {
             thread.start();
 
         }
+
+        commandLineParams = null;
     }
 
     private static class DelayedStartRunnable implements Runnable {
