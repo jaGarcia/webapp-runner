@@ -161,6 +161,7 @@ public class Main {
         }
 
         if (!commandLineParams.bindOnInit) {
+            System.out.println("Setting nioConnector bindOnInit=false");
             nioConnector.setProperty("bindOnInit", "false");
         }
 
