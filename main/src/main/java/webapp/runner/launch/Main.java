@@ -72,7 +72,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        System.out.println("Init'ing custom web-app runner version! test4");
+        System.out.println("Init'ing custom web-app runner version! test5");
 
         CommandLineParams commandLineParams = new CommandLineParams();
 
