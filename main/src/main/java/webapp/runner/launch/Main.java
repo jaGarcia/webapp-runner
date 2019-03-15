@@ -72,7 +72,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        System.out.println("Init'ing custom web-app runner version!");
+        System.out.println("Init'ing custom web-app runner version! test");
 
         CommandLineParams commandLineParams = new CommandLineParams();
 
@@ -311,6 +311,7 @@ public class Main {
 
         if (!commandLineParams.bindOnInit && commandLineParams.bindOnInitStartConnectorProperty != null) {
 
+            System.out.println("About to create DelayedStartRunnable");
             Thread thread = new Thread(new DelayedStartRunnable(tomcat, commandLineParams.bindOnInitStartConnectorProperty));
 
             thread.start();
@@ -341,6 +342,7 @@ public class Main {
                     boolean triggerStart = "true".equalsIgnoreCase(System.getProperty(bindOnInitStartConnectorProperty));
 
                     if (triggerStart) {
+                        System.out.println("Found bindOnInitStartConnectorProperty! Starting tomcat connector!");
                         tomcat.getConnector().start();
                         notStarted = false;
                     } else {
